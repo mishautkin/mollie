@@ -9,8 +9,12 @@ test('Has title @Critical', async ({ page }) => {
 });
 
 test( 'Test CLI @Critical', async ( { page, cli } ) => {
-	console.log(
+	console.log( 'Setting WP_DEBUG to true',
 		await cli.setWpConst( { WP_DEBUG: true } )
+	);
+
+	console.log( 'Checking if plugin is installed',
+		await cli.isPluginInstalled( 'mollie-payments-for-woocommerce' )
 	);
 
 	const postTitle = `Test post ${ Date.now() }`;
@@ -20,7 +24,7 @@ test( 'Test CLI @Critical', async ( { page, cli } ) => {
 		post_status: 'publish',
 	} );
 
-	await page.goto( `./?page_id=${ postId }` );
+	await page.goto( `./?p=${ postId }` );
 	await expect(
 		page.locator( 'h1' ),
 		'Assert page heading',

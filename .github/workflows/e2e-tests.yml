@@ -56,7 +56,7 @@ jobs:
       SCRIPT_NAME: 'test:${{ github.event.inputs.TEST_SUITE }}'
       COMPOSER_DEPS_INSTALL: false
       PHP_VERSION: ${{ matrix.php }}
-      NODE_VERSION: 20
+      NODE_VERSION: 22
       PLAYWRIGHT_BROWSER_ARGS: 'chromium --with-deps'
       PRE_SCRIPT: npm run setup:env
       # PRE_SCRIPT: |
