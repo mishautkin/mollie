@@ -28,21 +28,21 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
-    name: Build Mollie package
-    uses: inpsyde/reusable-workflows/.github/workflows/build-plugin-archive.yml@build-plugin-archive-dist-old-version
-    with:
-      PLUGIN_VERSION: ${{ inputs.PACKAGE_VERSION }}
-      NODE_VERSION: 22
-      PHP_VERSION: 7.4
-      PLUGIN_MAIN_FILE: ./mollie-payments-for-woocommerce.php
-      PLUGIN_FOLDER_NAME: mollie-payments-for-woocommerce
-      ARCHIVE_NAME: mollie-payments-for-woocommerce
-      COMPILE_ASSETS_ARGS: '-vv --env=root'
+  # build:
+  #   name: Build Mollie package
+  #   uses: inpsyde/reusable-workflows/.github/workflows/build-plugin-archive.yml@build-plugin-archive-dist-old-version
+  #   with:
+  #     PLUGIN_VERSION: ${{ inputs.PACKAGE_VERSION }}
+  #     NODE_VERSION: 22
+  #     PHP_VERSION: 7.4
+  #     PLUGIN_MAIN_FILE: ./mollie-payments-for-woocommerce.php
+  #     PLUGIN_FOLDER_NAME: mollie-payments-for-woocommerce
+  #     ARCHIVE_NAME: mollie-payments-for-woocommerce
+  #     COMPILE_ASSETS_ARGS: '-vv --env=root'
 
   e2e-playwright:
     name: Run Playwright E2E Tests for Mollie
-    needs: build
+    # needs: build
     uses: inpsyde/reusable-workflows/.github/workflows/test-playwright.yml@feature/test-playwright-work-dir
     strategy:
       matrix:
@@ -58,11 +58,11 @@ jobs:
       PHP_VERSION: ${{ matrix.php }}
       NODE_VERSION: 20
       PLAYWRIGHT_BROWSER_ARGS: 'chromium --with-deps'
-      # PRE_SCRIPT: npm run setup:env
-      PRE_SCRIPT: |
-        gh run download ${{ github.run_id }} -n mollie-payments-for-woocommerce -D resources/files
-        (cd resources/files && zip -r mollie-payments-for-woocommerce.zip mollie-payments-for-woocommerce && rm -rf mollie-payments-for-woocommerce)
-        npm run setup:env
+      PRE_SCRIPT: npm run setup:env
+      # PRE_SCRIPT: |
+      #   gh run download ${{ github.run_id }} -n mollie-payments-for-woocommerce -D resources/files
+      #   (cd resources/files && zip -r mollie-payments-for-woocommerce.zip mollie-payments-for-woocommerce && rm -rf mollie-payments-for-woocommerce)
+      #   npm run setup:env
     secrets:
       ENV_FILE_DATA: ${{ secrets.ENV_FILE_DATA }}
       # NPM_REGISTRY_TOKEN: ${{ secrets.DEPLOYBOT_PACKAGES_READ_ACCESS_TOKEN}}
