@@ -4,7 +4,10 @@ import type { TestExtend } from './utils/test';
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
  */
-// import dotenv from 'dotenv';
+import dotenv from 'dotenv';
+dotenv.config({
+  path: process.env.CI ? '.env.ci' : '.env'
+});
 // import path from 'path';
 // dotenv.config({ path: path.resolve(__dirname, '.env') });
 
