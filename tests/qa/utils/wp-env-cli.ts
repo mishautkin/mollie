@@ -15,7 +15,7 @@ export class WpEnvCli extends WpCli {
 		if ( ! path ) {
 			throw new Error( 'WpEnvCli: path is required' );
 		}
-
+		console.log( 'cwd:', this.path );
 		this.execOptions = { cwd: path };
 	}
 }
