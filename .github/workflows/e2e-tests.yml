@@ -53,7 +53,7 @@ jobs:
         playwright-report/
       ARTIFACT_INCLUDE_HIDDEN_FILES: true
       SCRIPT_NAME: 'test:${{ github.event.inputs.TEST_SUITE }}'
-      COMPOSER_DEPS_INSTALL: true
+      COMPOSER_DEPS_INSTALL: false
       PHP_VERSION: ${{ matrix.php }}
       NODE_VERSION: 20
       PLAYWRIGHT_BROWSER_ARGS: 'chromium --with-deps'
