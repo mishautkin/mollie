@@ -64,7 +64,7 @@ export abstract class WpCli {
 		] );
 	}
 	async isPluginInstalled( pluginSlug: string ) {
-		return await this.execute( `wp plugin is-installed ${ pluginSlug }` );
+		return await this.execute( `plugin is-installed ${ pluginSlug }` );
 	}
 
 	/**
