@@ -41,10 +41,10 @@ const commands = [
 		command:
 			'wp-env run tests-cli -- wp option update woocommerce_coming_soon "no"',
 	},
-	// {
-	// 	description: 'Install and activate plugin',
-	// 	command: 'wp plugin install /resources/files/mollie-payments-for-woocommerce.zip --activate',
-	// }
+	{
+		description: 'Install Mollie plugin',
+		command: 'wp-env run tests-cli -- wp plugin install /var/www/html/wp-content/files/mollie-payments-for-woocommerce.zip --activate',
+	},
 ];
 
 console.log( 'Starting test environment setup...\n' );

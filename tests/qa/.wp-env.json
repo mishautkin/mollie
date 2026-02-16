@@ -10,7 +10,8 @@
         "./resources/files/mollie-payments-for-woocommerce.zip"
     ],
     "mappings": {
-        "wp-cli.yml": "./wp-cli.yml"
+        "wp-cli.yml": "./wp-cli.yml",
+        "wp-content/files": "./resources/files"
     },
     "lifecycleScripts": {
         "afterStart": "node bin/test-env-setup.js",
