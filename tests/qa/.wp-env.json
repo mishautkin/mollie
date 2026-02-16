@@ -6,7 +6,8 @@
     },
     "phpVersion": "8.0",
     "plugins": [
-        "./resources/e2e-snippets"
+        "./resources/e2e-snippets",
+        "./resources/files/mollie-payments-for-woocommerce.zip"
     ],
     "mappings": {
         "wp-cli.yml": "./wp-cli.yml"
