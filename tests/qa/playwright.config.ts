@@ -35,7 +35,7 @@ export default defineConfig< TestExtend >({
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'chromium',
+      name: 'all',
       use: { ...devices['Desktop Chrome'] },
     },
 
