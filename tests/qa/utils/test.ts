@@ -8,13 +8,12 @@ import { test as base, expect } from '@playwright/test';
 import {
 	WpEnvCli,
 } from './wp-env-cli';
-import { WpCliConfig } from './types';
 
-type BaseExtend = {
+type TestExtend = {
 	cli: WpEnvCli;
 };
 
-const test = base.extend< BaseExtend >( {
+const test = base.extend< TestExtend >( {
 	cli: async ( {}, use ) => {
 		await use( new WpEnvCli(
 			String( process.env.WPCLI_PATH )
@@ -22,4 +21,4 @@ const test = base.extend< BaseExtend >( {
 	},
 } );
 
-export { test, expect, BaseExtend };
+export { test, expect, TestExtend };
