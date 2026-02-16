@@ -46,7 +46,7 @@ export abstract class WpCli {
 			}
 
 			return stdout.trim();
-		} catch ( error: any ) {
+		} catch ( error ) {
 			throw new Error(
 				`Command execution failed: ${ error.message }\n` +
 					`Command: ${ finalCommand }`

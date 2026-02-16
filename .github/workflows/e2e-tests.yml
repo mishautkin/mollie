@@ -50,8 +50,8 @@ jobs:
     with:
       WORK_DIR: 'tests/qa'
       ARTIFACT_PATH: |
-        artifacts/*
-        playwright-report/
+        tests/qa/artifacts/*
+        tests/qa/playwright-report/
       ARTIFACT_INCLUDE_HIDDEN_FILES: true
       SCRIPT_NAME: 'test:${{ github.event.inputs.TEST_SUITE }}'
       COMPOSER_DEPS_INSTALL: false
