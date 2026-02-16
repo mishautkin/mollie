@@ -1,6 +1,7 @@
 import { test, expect } from '../utils/test';
 
 test('Has title @Critical', async ({ page }) => {
+	console.log( process.env.WP_BASE_URL );
   await page.goto('/');
 
   // Expect a title "to contain" a substring.
