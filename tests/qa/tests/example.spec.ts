@@ -1,7 +1,6 @@
 import { test, expect } from '../utils/test';
 
 test('Has title @Critical', async ({ page }) => {
-	console.log( process.env.WP_BASE_URL );
   await page.goto('/');
 
   // Expect a title "to contain" a substring.
@@ -23,8 +22,9 @@ test( 'Test CLI @Critical', async ( { page, cli } ) => {
 		post_title: postTitle,
 		post_status: 'publish',
 	} );
+	console.log( 'Post ID:', JSON.stringify( postId ) );
 
-	await page.goto( `./?p=${ postId }` );
+	await page.goto( `./?page_id=${ postId }` );
 	await expect(
 		page.locator( 'h1' ),
 		'Assert page heading',
