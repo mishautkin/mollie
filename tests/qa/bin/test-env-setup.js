@@ -43,7 +43,11 @@ const commands = [
 	},
 	{
 		description: 'Install Mollie plugin',
-		command: 'wp-env run tests-cli -- wp plugin install /home/runner/work/mollie/mollie/tests/qa/resources/files/mollie-payments-for-woocommerce.zip --activate',
+		command: 'wp-env run tests-cli -- wp plugin install /var/www/html/wp-content/files/mollie-payments-for-woocommerce.zip --activate',
+	},
+	{
+		description: 'List mapped files',
+		command: 'wp-env run tests-cli -- ls -la /var/www/html/wp-content/files/',
 	},
 ];
 
