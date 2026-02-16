@@ -43,9 +43,9 @@ jobs:
     name: Run Playwright E2E Tests for Mollie
     # needs: build
     uses: inpsyde/reusable-workflows/.github/workflows/test-playwright.yml@feature/test-playwright-work-dir
-    # strategy:
-    #   matrix:
-    #     php: [ '8.2', '8.3' ]
+    strategy:
+      matrix:
+        php: [ '8.2' ]
     with:
       WORK_DIR: 'tests/qa'
       ARTIFACT_PATH: |
