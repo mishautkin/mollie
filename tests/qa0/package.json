@@ -30,7 +30,8 @@
     "@percy/playwright": "^1.0.4",
     "@playwright/test": "^1.50",
     "@types/node": "^20.8.4",
-    "@wordpress/scripts": "^25.0.0"
+    "@wordpress/scripts": "^25.0.0",
+    "@wordpress/env": "^10.30.0"
   },
   "scripts": {
     "setup:hosts": "echo '127.0.0.1 mywp.site' | sudo tee -a /etc/hosts",
