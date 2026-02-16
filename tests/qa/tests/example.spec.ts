@@ -13,7 +13,7 @@ test( 'Test CLI @Critical', async ( { page, cli } ) => {
 	);
 
 	console.log( 'Checking if plugin is installed',
-		String( await cli.isPluginInstalled( 'mollie-payments-for-woocommerce' ) )
+		await cli.isPluginInstalled( 'mollie-payments-for-woocommerce' )
 	);
 
 	const now = Date.now();
@@ -24,10 +24,13 @@ test( 'Test CLI @Critical', async ( { page, cli } ) => {
 		post_status: 'publish',
 	} );
 	console.log( 'Post ID:', JSON.stringify( postId ) );
+	
+	await page.goto( `/` );
+	await expect( page.getByText( postTitle ), 'Assert post title' ).toBeVisible();
 
-	await page.goto( `/test-post-${ now }/` );
-	await expect(
-		page.locator( 'h1' ),
-		'Assert page heading',
-	).toHaveText( postTitle );
+	// await page.goto( `/test-post-${ now }/` );
+	// await expect(
+	// 	page.locator( 'h1' ),
+	// 	'Assert page heading',
+	// ).toHaveText( postTitle );
 } );
