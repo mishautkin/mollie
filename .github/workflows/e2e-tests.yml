@@ -1,0 +1,65 @@
+name: E2E Tests
+
+on:
+  workflow_dispatch:
+    inputs:
+      TEST_SUITE:
+        description: 'Test suite to run'
+        required: true
+        default: 'critical'
+        type: choice
+        options:
+          - critical
+          # - smoke
+          - all
+          - refund
+      #     - grep
+      # TEST_GREP_PATTERN:
+      #   description: 'Grep pattern (only used when "Test suite to run" == "grep")'
+      #   required: false
+      #   type: string
+      PACKAGE_VERSION:
+        description: 'Package Version'
+        required: true
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build package
+    uses: inpsyde/reusable-workflows/.github/workflows/build-plugin-archive.yml@main
+    with:
+      PLUGIN_VERSION: ${{ inputs.PACKAGE_VERSION }}
+      NODE_VERSION: 22
+      PHP_VERSION: 7.4
+      PLUGIN_MAIN_FILE: ./mollie-payments-for-woocommerce.php
+      PLUGIN_FOLDER_NAME: mollie-payments-for-woocommerce
+      ARCHIVE_NAME: mollie-payments-for-woocommerce
+      COMPILE_ASSETS_ARGS: '-vv --env=root'
+
+  e2e-playwright:
+    needs: build
+    uses: inpsyde/reusable-workflows/.github/workflows/test-playwright.yml@feature/test-playwright-work-dir
+    strategy:
+      matrix:
+        php: [ '8.2', '8.3' ]
+    with:
+      WORK_DIR: 'tests/qa'
+      ARTIFACT_PATH: |
+        artifacts/*
+        playwright-report/
+      ARTIFACT_INCLUDE_HIDDEN_FILES: true
+      SCRIPT_NAME: 'test:${{ github.event.inputs.TEST_SUITE }}'
+      COMPOSER_DEPS_INSTALL: true
+      PHP_VERSION: ${{ matrix.php }}
+      NODE_VERSION: 20
+      PLAYWRIGHT_BROWSER_ARGS: 'chromium --with-deps'
+      PRE_SCRIPT: |
+        gh run download ${{ github.run_id }} -n mollie-payments-for-woocommerce -D resources/files
+        (cd resources/files && zip -r mollie-payments-for-woocommerce.zip mollie-payments-for-woocommerce && rm -rf mollie-payments-for-woocommerce)
+        npm run setup:env
+    secrets:
+      ENV_FILE_DATA: ${{ secrets.ENV_FILE_DATA }}
+      # NPM_REGISTRY_TOKEN: ${{ secrets.DEPLOYBOT_PACKAGES_READ_ACCESS_TOKEN}}

@@ -1,0 +1,20 @@
+{
+    "name": "woocommerce/tests",
+    "description": "Private test dependencies for Mollie Payments for WooCommerce tests",
+    "type": "project",
+    "repositories": {
+        "packagist.org": false,
+        "private-packagist": {
+            "type": "composer",
+            "url": "https://repo.packagist.com/inpsyde/"
+        }
+    },
+    "require": {
+        "inpsyde-mirror/woocommerce-subscriptions": "^7.9"
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true
+        }
+    }
+}
