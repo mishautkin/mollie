@@ -9,8 +9,7 @@
         "./resources/e2e-snippets"
     ],
     "mappings": {
-        "wp-cli.yml": "./wp-cli.yml",
-        "wp-content/files": "./resources/files"
+        "wp-cli.yml": "./wp-cli.yml"
     },
     "lifecycleScripts": {
         "afterStart": "node bin/test-env-setup.js",
