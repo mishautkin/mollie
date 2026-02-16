@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "setup:hosts": "echo '127.0.0.1 mywp.site' | sudo tee -a /etc/hosts",
+    "setup:wpenv": "npm install -g @wordpress/env",
     "setup:env": "npm run setup:hosts && npm install && wp-env start --update",
     "setup:all": "npm run setup:env && npm run setup:plugin && npm run setup:tests",
     "setup:reset": "wp-env stop && wp-env destroy",

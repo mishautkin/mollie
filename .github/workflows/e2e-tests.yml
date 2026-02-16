@@ -57,7 +57,9 @@ jobs:
       PHP_VERSION: ${{ matrix.php }}
       NODE_VERSION: 20
       PLAYWRIGHT_BROWSER_ARGS: 'chromium --with-deps'
-      PRE_SCRIPT: npm run setup:env
+      PRE_SCRIPT: |
+        npm run setup:wpenv
+        npm run setup:env
       # PRE_SCRIPT: |
       #   gh run download ${{ github.run_id }} -n mollie-payments-for-woocommerce -D resources/files
       #   (cd resources/files && zip -r mollie-payments-for-woocommerce.zip mollie-payments-for-woocommerce && rm -rf mollie-payments-for-woocommerce)
