@@ -7,7 +7,7 @@ import { WpCli } from './wp-cli';
  * Class for executing WP CLI commands on wp-env
  */
 export class WpEnvCli extends WpCli {
-	protected commandPrefix = 'npx wp-env run cli bash -c "';
+	protected commandPrefix = 'npx wp-env run tests-cli bash -c "';
 	protected commandPostfix = '"';
 	constructor( protected readonly path: string ) {
 		super();
