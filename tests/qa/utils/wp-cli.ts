@@ -46,7 +46,7 @@ export abstract class WpCli {
 			}
 
 			return stdout.trim();
-		} catch ( error ) {
+		} catch ( error: any ) {
 			throw new Error(
 				`Command execution failed: ${ error.message }\n` +
 					`Command: ${ finalCommand }`
@@ -62,6 +62,9 @@ export abstract class WpCli {
 			'cache flush',
 			'kinsta cache purge --all',
 		] );
+	}
+	async isPluginInstalled( pluginSlug: string ) {
+		return await this.execute( `wp plugin is-installed ${ pluginSlug }` );
 	}
 
 	/**
