@@ -63,8 +63,13 @@ export abstract class WpCli {
 			'kinsta cache purge --all',
 		] );
 	}
+
 	async isPluginInstalled( pluginSlug: string ) {
 		return await this.execute( `plugin is-installed ${ pluginSlug }` );
+	}
+	
+	async getPluginStatus( pluginSlug: string ) {
+		return await this.execute( `plugin get ${ pluginSlug } --field=status` );
 	}
 
 	/**
