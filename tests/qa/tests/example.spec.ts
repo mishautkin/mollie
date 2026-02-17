@@ -9,7 +9,10 @@ test('Has title @Critical', async ({ page }) => {
 
 test( 'Test CLI @Critical', async ( { page, cli } ) => {
 	await cli.setWpConst( { WP_DEBUG: true } );
-	await cli.isPluginInstalled( 'mollie-payments-for-woocommerce' );
+	await expect(
+		await cli.isPluginInstalled( 'mollie-payments-for-woocommerce' ),
+		'Assert plugin is installed',
+	).toBe( 0 );
 
 	const now = Date.now();
 	const postTitle = `Test post ${ now }`;
