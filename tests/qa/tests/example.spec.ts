@@ -8,13 +8,8 @@ test('Has title @Critical', async ({ page }) => {
 });
 
 test( 'Test CLI @Critical', async ( { page, cli } ) => {
-	console.log( 'Setting WP_DEBUG to true',
-		await cli.setWpConst( { WP_DEBUG: true } )
-	);
-
-	console.log( 'Checking if plugin is installed',
-		await cli.isPluginInstalled( 'mollie-payments-for-woocommerce' )
-	);
+	await cli.setWpConst( { WP_DEBUG: true } );
+	await cli.isPluginInstalled( 'mollie-payments-for-woocommerce' );
 
 	const now = Date.now();
 	const postTitle = `Test post ${ now }`;
@@ -26,13 +21,21 @@ test( 'Test CLI @Critical', async ( { page, cli } ) => {
 	console.log( 'Post ID:', JSON.stringify( postId ) );
 	
 	await page.goto( `/` );
-	await expect( page.getByText( postTitle ), 'Assert post title' ).toBeVisible();
+	await expect.soft(
+		page.getByText( postTitle ).first(),
+		'Assert post title',
+	).toBeVisible();
 
 	// Not working:
-	// await page.goto( `/test-post-${ now }/` );
-	// await page.goto( `/?page_id=${ postId }` );
-	// await expect(
-	// 	page.locator( 'h1' ),
-	// 	'Assert page heading',
-	// ).toHaveText( postTitle );
+	await page.goto( `/test-post-${ now }/` );
+	await expect.soft(
+		page.locator( 'h1' ),
+		'Assert page heading',
+	).toHaveText( postTitle );
+
+	await page.goto( `/?page_id=${ postId }` );
+	await expect.soft(
+		page.locator( 'h1' ),
+		'Assert page heading',
+	).toHaveText( postTitle );
 } );
