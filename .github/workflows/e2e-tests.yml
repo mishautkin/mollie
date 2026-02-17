@@ -29,7 +29,6 @@ on:
       TEST_PROJECT:
         description: 'Playwright project name (only used when TEST_SUITE == "grep")'
         required: false
-        default: 'all'
         type: string
 
 concurrency:
