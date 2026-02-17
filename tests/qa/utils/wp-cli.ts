@@ -44,7 +44,7 @@ export abstract class WpCli {
 			if ( stderr ) {
 				console.error( `Execution Error: ${ stderr }` );
 			}
-			console.log( `stdout.trim: ${ stdout.trim() }` );
+			console.log( `stdout.trim: ${ stdout }` );
 			return stdout.trim();
 		} catch ( error: any ) {
 			throw new Error(
