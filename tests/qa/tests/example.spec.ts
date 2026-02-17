@@ -7,6 +7,10 @@ test('Has title @Critical', async ({ page }) => {
   await expect( page ).toHaveTitle( 'Mollie Payments for WooCommerce E2E Test Suite' );
 });
 
+test( 'Boolean test', async ( {} ) => {
+  await expect( true ).toBe( true );
+} );
+
 test( 'Test CLI @Critical', async ( { page, cli } ) => {
 	await cli.setWpConst( { WP_DEBUG: true } );
 	await cli.isPluginInstalled( 'mollie-payments-for-woocommerce' );

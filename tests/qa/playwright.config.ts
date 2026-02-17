@@ -51,14 +51,14 @@ export default defineConfig< TestExtend >({
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'all',
+      name: 'chrome',
       use: { ...devices['Desktop Chrome'] },
     },
 
-    // {
-    //   name: 'firefox',
-    //   use: { ...devices['Desktop Firefox'] },
-    // },
+    {
+      name: 'firefox',
+      use: { ...devices['Desktop Firefox'] },
+    },
 
     // {
     //   name: 'webkit',
