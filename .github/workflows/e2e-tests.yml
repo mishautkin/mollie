@@ -13,11 +13,16 @@ on:
           # - smoke
           - all
           - refund
-      #     - grep
-      # TEST_GREP_PATTERN:
-      #   description: 'Grep pattern (only used when "Test suite to run" == "grep")'
-      #   required: false
-      #   type: string
+          - grep
+      TEST_GREP_PATTERN:
+        description: 'Grep pattern (only used when "Test suite to run" == "grep")'
+        required: false
+        type: string
+      TEST_PROJECT:
+        description: 'Project from playwright.config'
+        required: false
+        default: ''
+        type: string
       PACKAGE_VERSION:
         description: 'Package Version'
         required: true
@@ -49,12 +54,14 @@ jobs:
         php: [ '8.2' ]
     with:
       WORK_DIR: 'tests/qa'
+      SCRIPT_NAME: ${{ inputs.TEST_SUITE != 'grep' && format('test:{0}', inputs.TEST_SUITE) || '' }}
+      PLAYWRIGHT_GREP: ${{ inputs.TEST_SUITE == 'grep' && inputs.TEST_GREP_PATTERN || '' }}
+      PLAYWRIGHT_PROJECT: ${{ inputs.TEST_PROJECT || '' }}
       ARTIFACT_PATH: |
         tests/qa/artifacts/*
         tests/qa/playwright-report/
         tests/qa/test-results/
       ARTIFACT_INCLUDE_HIDDEN_FILES: true
-      SCRIPT_NAME: 'test:${{ github.event.inputs.TEST_SUITE }}'
       COMPOSER_DEPS_INSTALL: false
       PHP_VERSION: ${{ matrix.php }}
       NODE_VERSION: 22
