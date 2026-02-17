@@ -28,7 +28,9 @@ test( 'Test CLI @Critical', async ( { page, cli } ) => {
 	await page.goto( `/` );
 	await expect( page.getByText( postTitle ), 'Assert post title' ).toBeVisible();
 
+	// Not working:
 	// await page.goto( `/test-post-${ now }/` );
+	// await page.goto( `/?page_id=${ postId }` );
 	// await expect(
 	// 	page.locator( 'h1' ),
 	// 	'Assert page heading',
