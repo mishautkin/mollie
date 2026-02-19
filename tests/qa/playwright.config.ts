@@ -2,6 +2,7 @@
  * External dependencies
  */
 import { defineConfig, devices } from '@playwright/test';
+import { WpCliEnvType } from '@inpsyde/playwright-utils/build/@types/wp-cli';
 import dotenv from 'dotenv';
 import path from 'path';
 /**
@@ -94,6 +95,11 @@ export default defineConfig< TestBaseExtend >( {
 		mollieApiMethod:
 			( process.env.MOLLIE_API_METHOD as MollieSettings.ApiMethod ) ||
 			'payment',
+
+		cliConfig: {
+			envType: process.env.WPCLI_ENV_TYPE as WpCliEnvType,
+			path: process.env.WPCLI_PATH,
+		},
 	},
 
 	/* Configure projects for major browsers */
