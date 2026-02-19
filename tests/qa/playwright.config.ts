@@ -57,12 +57,12 @@ export default defineConfig< TestBaseExtend >( {
 
 		ignoreHTTPSErrors: process.env.IGNORE_HTTPS_ERRORS === 'true',
 
-		httpCredentials: {
-			// @ts-ignore
-			username: process.env.WP_BASIC_AUTH_USER,
-			// @ts-ignore
-			password: process.env.WP_BASIC_AUTH_PASS,
-		},
+		// httpCredentials: {
+		// 	// @ts-ignore
+		// 	username: process.env.WP_BASIC_AUTH_USER,
+		// 	// @ts-ignore
+		// 	password: process.env.WP_BASIC_AUTH_PASS,
+		// },
 
 		...devices[ 'Desktop Chrome' ],
 
