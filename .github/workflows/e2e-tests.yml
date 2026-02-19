@@ -76,4 +76,4 @@ jobs:
         npm run setup:env
     secrets:
       ENV_FILE_DATA: ${{ secrets.ENV_FILE_DATA }}
-      # NPM_REGISTRY_TOKEN: ${{ secrets.DEPLOYBOT_PACKAGES_READ_ACCESS_TOKEN}}
+      NPM_REGISTRY_TOKEN: ${{ secrets.SYDE_MOLLIE_DEPLOYBOT_GITHUB_TOKEN_PACKAGES_R}}
