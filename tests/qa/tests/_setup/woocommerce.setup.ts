@@ -61,21 +61,21 @@ setup( 'Setup WooCommerce plugin (active)', async ( { requestUtils } ) => {
 	await requestUtils.activatePlugin( 'woocommerce' );
 } );
 
-setup(
-	'Setup WC Subscriptions plugin (inactive)',
-	async ( { requestUtils, plugins } ) => {
-		if (
-			! ( await requestUtils.isPluginInstalled(
-				subscriptionsPlugin.slug
-			) )
-		) {
-			await plugins.installPluginFromFile(
-				subscriptionsPlugin.zipFilePath
-			);
-		}
-		await requestUtils.deactivatePlugin( subscriptionsPlugin.slug );
-	}
-);
+// setup(
+// 	'Setup WC Subscriptions plugin (inactive)',
+// 	async ( { requestUtils, plugins } ) => {
+// 		if (
+// 			! ( await requestUtils.isPluginInstalled(
+// 				subscriptionsPlugin.slug
+// 			) )
+// 		) {
+// 			await plugins.installPluginFromFile(
+// 				subscriptionsPlugin.zipFilePath
+// 			);
+// 		}
+// 		await requestUtils.deactivatePlugin( subscriptionsPlugin.slug );
+// 	}
+// );
 
 setup( 'Setup theme', async ( { requestUtils } ) => {
 	const slug = 'storefront';
