@@ -6,12 +6,11 @@ import {
 	testPluginReinstallationFromFile,
 	testPluginDeactivation,
 	testPluginRemoval,
-	test,
-	expect,
 } from '@inpsyde/playwright-utils/build';
 /**
  * Internal dependencies
  */
+import { test, expect } from '../../utils';
 import { molliePlugin } from '../../resources';
 
 testPluginInstallationFromFile( 'C419986', molliePlugin, '@Critical' );
@@ -22,7 +21,7 @@ testPluginDeactivation( 'C3319', molliePlugin );
 
 testPluginRemoval( 'C3318', molliePlugin );
 
-test( 'Test CLI @Critical', async ( { page, cli } ) => {
+test( 'Test CLI @Critical', async ( { visitorPage, cli } ) => {
 	await cli.setWpConst( { WP_DEBUG: true } );
 	const now = Date.now();
 	const postTitle = `Test post ${ now }`;
@@ -33,22 +32,22 @@ test( 'Test CLI @Critical', async ( { page, cli } ) => {
 	} );
 	console.log( 'Post ID:', JSON.stringify( postId ) );
 	
-	await page.goto( `/` );
+	await visitorPage.goto( `/` );
 	await expect.soft(
-		page.getByText( postTitle ).first(),
+		visitorPage.getByText( postTitle ).first(),
 		'Assert post title',
 	).toBeVisible();
 
 	// Not working:
-	await page.goto( `/test-post-${ now }/` );
+	await visitorPage.goto( `/test-post-${ now }/` );
 	await expect.soft(
-		page.locator( 'h1' ),
+		visitorPage.locator( 'h1' ),
 		'Assert page heading',
 	).toHaveText( postTitle );
 
-	await page.goto( `/?page_id=${ postId }` );
+	await visitorPage.goto( `/?page_id=${ postId }` );
 	await expect.soft(
-		page.locator( 'h1' ),
+		visitorPage.locator( 'h1' ),
 		'Assert page heading',
 	).toHaveText( postTitle );
 } );

@@ -31,7 +31,9 @@ export const testPaymentStatusOnCheckout = (
 
 	Object.assign( testData, { orderStatus, customer, currency } );
 
-	test( `${ testId } | Transaction${ multistepLabel } - Checkout - ${ gatewayLabel } - Payment status ${ payment.status } creates order with status ${ orderStatus }`, async ( {
+	const criticalLabel = gateway.slug === 'creditcard' ? ' @Critical' : '';
+
+	test( `${ testId } | Transaction${ multistepLabel } - Checkout - ${ gatewayLabel } - Payment status ${ payment.status } creates order with status ${ orderStatus }${ criticalLabel }`, async ( {
 		wooCommerceApi,
 		utils,
 		checkout,
