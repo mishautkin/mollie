@@ -2,12 +2,18 @@
  * External dependencies
  */
 import { defineConfig, devices } from '@playwright/test';
+import dotenv from 'dotenv';
+import path from 'path';
 /**
  * Internal dependencies
  */
 import { MollieSettings } from './resources';
 import { TestBaseExtend } from './utils';
-require( 'dotenv' ).config();
+
+const dotenvPath = process.env.CI
+    ? path.resolve( __dirname, '.env.ci' )
+    : undefined;
+dotenv.config( { path: dotenvPath } );
 
 export default defineConfig< TestBaseExtend >( {
 	testDir: 'tests',
@@ -57,12 +63,12 @@ export default defineConfig< TestBaseExtend >( {
 
 		ignoreHTTPSErrors: process.env.IGNORE_HTTPS_ERRORS === 'true',
 
-		// httpCredentials: {
-		// 	// @ts-ignore
-		// 	username: process.env.WP_BASIC_AUTH_USER,
-		// 	// @ts-ignore
-		// 	password: process.env.WP_BASIC_AUTH_PASS,
-		// },
+		httpCredentials: {
+			// @ts-ignore
+			username: process.env.WP_BASIC_AUTH_USER,
+			// @ts-ignore
+			password: process.env.WP_BASIC_AUTH_PASS,
+		},
 
 		...devices[ 'Desktop Chrome' ],
 

@@ -6,9 +6,9 @@ on:
       PACKAGE_VERSION:
         description: 'Package Version'
         required: true
-        default: 8.4.0
+        default: 8.1.4
       TEST_SUITE:
-        description: 'Test suite to run'
+        description: 'Test suite'
         required: true
         default: 'critical'
         type: choice
@@ -17,17 +17,8 @@ on:
           # - smoke
           - all
           - refund
-          - grep
-      TEST_GREP_PATTERN:
-        description: 'Grep pattern (only used when TEST_SUITE == "grep")'
-        required: false
-        type: string
-      TEST_GREP_INVERT_PATTERN:
-        description: 'Grep invert pattern (only used when TEST_SUITE == "grep")'
-        required: false
-        type: string
-      TEST_PROJECT:
-        description: 'Playwright project name (only used when TEST_SUITE == "grep")'
+      PLAYWRIGHT_CLI_ARGS:
+        description: 'Arguments for `npx playwright test` (if set "Test suite" will be ignored)'
         required: false
         type: string
 
@@ -57,10 +48,8 @@ jobs:
         php: [ '8.2' ]
     with:
       WORK_DIR: 'tests/qa'
-      SCRIPT_NAME: ${{ inputs.TEST_SUITE != 'grep' && format('test:{0}', inputs.TEST_SUITE) || '' }}
-      PLAYWRIGHT_GREP: ${{ inputs.TEST_SUITE == 'grep' && inputs.TEST_GREP_PATTERN || '' }}
-      PLAYWRIGHT_GREP_INVERT: ${{ inputs.TEST_SUITE == 'grep' && inputs.TEST_GREP_INVERT_PATTERN || '' }}
-      PLAYWRIGHT_PROJECT: ${{ inputs.TEST_SUITE == 'grep' && inputs.TEST_PROJECT || '' }}
+      SCRIPT_NAME: ${{ inputs.PLAYWRIGHT_CLI_ARGS && '' || format('test:{0}', inputs.TEST_SUITE) }}
+      PLAYWRIGHT_CLI_ARGS: ${{ inputs.PLAYWRIGHT_CLI_ARGS || '' }}
       ARTIFACT_PATH: |
         tests/qa/artifacts/*
         tests/qa/playwright-report/
