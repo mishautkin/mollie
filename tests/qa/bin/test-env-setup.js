@@ -21,11 +21,6 @@ const commands = [
 		description: 'Activate WooCommerce',
 		command: 'wp-env run tests-cli -- wp plugin activate woocommerce',
 	},
-	// {
-	// 	description: 'Install WooCommerce Payments',
-	// 	command:
-	// 		'wp-env run tests-cli -- wp plugin install woocommerce-payments',
-	// },
 	{
 		description: 'Update URL structure',
 		command:
@@ -41,14 +36,14 @@ const commands = [
 		command:
 			'wp-env run tests-cli -- wp option update woocommerce_coming_soon "no"',
 	},
-	{
-		description: 'Install Mollie plugin',
-		command: 'wp-env run tests-cli -- wp plugin install /var/www/html/wp-content/files/mollie-payments-for-woocommerce.zip --activate',
-	},
-	{
-		description: 'List mapped files',
-		command: 'wp-env run tests-cli -- ls -la /var/www/html/wp-content/files/',
-	},
+	// {
+	// 	description: 'Install Mollie plugin',
+	// 	command: 'wp-env run tests-cli -- wp plugin install /var/www/html/wp-content/files/mollie-payments-for-woocommerce.zip --activate',
+	// },
+	// {
+	// 	description: 'List mapped files',
+	// 	command: 'wp-env run tests-cli -- ls -la /var/www/html/wp-content/files/',
+	// },
 ];
 
 console.log( 'Starting test environment setup...\n' );

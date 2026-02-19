@@ -9,11 +9,6 @@ const commands = [
 		description: 'Activate storefront theme',
 		command: 'wp-env run tests-cli wp theme deactivate storefront',
 	},
-	// {
-	// 	description: 'Uninstall WooCommerce Payments',
-	// 	command:
-	// 		'wp-env run tests-cli -- wp plugin delete woocommerce-payments',
-	// },
 	{
 		description: 'Uninstall WooCommerce',
 		command: 'wp-env run tests-cli -- wp plugin delete woocommerce',
