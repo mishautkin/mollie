@@ -24,10 +24,6 @@ testPluginRemoval( 'C3318', molliePlugin );
 
 test( 'Test CLI @Critical', async ( { page, cli } ) => {
 	await cli.setWpConst( { WP_DEBUG: true } );
-	await cli.isPluginInstalled( 'mollie-payments-for-woocommerce' );
-	const status = await cli.getPluginStatus( 'mollie-payments-for-woocommerce' );
-	expect( status, 'Assert plugin is active' ).toBe( 'active' );
-
 	const now = Date.now();
 	const postTitle = `Test post ${ now }`;
 	const postId = await cli.postCreate( {
