@@ -1,0 +1,25 @@
+{
+  "name": "qa",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "setup:hosts": "echo '127.0.0.1 mywp.site' | sudo tee -a /etc/hosts",
+    "setup:wpenv": "npm install -g @wordpress/env",
+    "setup:env": "npm run setup:hosts && npm install && npx wp-env start --update",
+    "setup:all": "npm run setup:env && npm run setup:plugin && npm run setup:tests",
+    "setup:reset": "npx wp-env stop && npx wp-env destroy",
+    "setup:plugin": "cd ../.. && npm run build && mv mollie-payments-for-woocommerce.zip tests/qa/resources/files",
+    "test:critical": "npx playwright test --project=chrome --workers=1 --grep \"@Critical\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "@types/node": "^25.2.3",
+    "@wordpress/env": "^10.30.0",
+    "dotenv": "^16.3.1"
+  }
+}
